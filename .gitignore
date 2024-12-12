@@ -1,0 +1,7 @@
+// this is my gitignore 
+
+node_modules/
+dist/
+.idea/
+.vscode/
+.env/
