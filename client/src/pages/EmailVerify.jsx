@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { assets } from "../assets/assets";
@@ -9,10 +9,10 @@ function EmailVerify() {
   axios.defaults.withCredentials = true;
 
   const { backendUrl, isLoggedin, userData, getUserData } = useContext(AppContent);
-
-  const inputRefs = React.useRef([]);
-
+  
   const navigate = useNavigate();
+  
+    const inputRefs = React.useRef([]);
 
   const handleInput = (e, index) => {
     if (
@@ -67,6 +67,10 @@ function EmailVerify() {
       toast.error(error.message);
     }
   };
+
+  useEffect(() => {
+    isLoggedin && userData.isAccountVerified && navigate("/");
+  }, [isLoggedin, userData, navigate]);
 
   return (
     <div

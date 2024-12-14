@@ -3,6 +3,7 @@ import userModel from "../models/userModel.js";
 import bcrypt from "bcryptjs";
 import transporter from "../config/nodeMailer.js";
 import dotenv from "dotenv";
+import { EMAIL_VERIFY_TEMPLATE,PASSWORD_RESET_TEMPLATE } from "../config/emailTemplate.js";
 
 dotenv.config();
 
@@ -202,7 +203,8 @@ const mailOptions={
     from : process.env.SENDER_EMAIL,
     to : user.email,
     subject : "Account verification OTP",
-    text : ` Your account verification OTP is ${otp}`
+    // text : ` Your account verification OTP is ${otp}`,
+    html : EMAIL_VERIFY_TEMPLATE.replace("{{otp}}",otp).replace("{{email}}",user.email)
 
 }
 
@@ -333,7 +335,8 @@ try {
         from : process.env.SENDER_EMAIL,
         to : user.email,
         subject : "Password reset OTP",
-        text : ` Your password reset OTP is ${otp}`
+        // text : ` Your password reset OTP is ${otp}`,
+        html : PASSWORD_RESET_TEMPLATE.replace("{{otp}}",otp).replace("{{email}}",user.email)
     }
 
     await transporter.sendMail(mailOptions);
