@@ -9,6 +9,7 @@ import connectDB from './config/db.js';
 import authRouter from './routes/authRoute.js';
 import userRouter from './routes/userRoute.js';
 
+import path from "path";
 
 dotenv.config();
  const app = express();
@@ -29,6 +30,13 @@ dotenv.config();
   app.use("/api/auth",authRouter)
   app.use("/api/user",userRouter)
 
+  const __dirname = path.resolve()
+
+
+  app.use(express.static(path.join(__dirname,"/client/dist")))
+  app.get("*",(req,res)=>{
+      res.sendFile(path.resolve(__dirname,"client","dist","index.html"))
+  })
     app.listen(PORT, () => {
         
         console.log(`Server running on port ${PORT}`);

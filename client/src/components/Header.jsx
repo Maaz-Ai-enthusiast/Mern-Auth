@@ -1,6 +1,7 @@
 import { useContext } from "react"
 import { assets } from "../assets/assets"
 import { AppContent } from "../context/AppContext"
+import { Link } from "react-router-dom"
 function Header() {
 
   const {userData}=useContext(AppContent)
@@ -25,9 +26,11 @@ function Header() {
       <p
       className="mb-8 max-w-md"
       >Lets start with a quick product tour and we will have you up and running in no time  !</p>
-      <button
+   <Link to={userData ? "/dashboard" : "/login"}>
+   <button
       className="border border-gray-500 rounded-full px-8 py-2.5 hover:bg-gray-100 transition-all "
       >Get Stated</button>
+   </Link>
     </div>
   )
 }

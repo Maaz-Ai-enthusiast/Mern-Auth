@@ -75,6 +75,7 @@ function ResetPassword() {
     e.preventDefault();
 
     try {
+      
       const { data } = await axios.post(
         `${backendUrl}/api/auth/reset-password`,
         { email, otp, newPassword }

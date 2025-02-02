@@ -4,6 +4,7 @@ const userAuth = async (req, res, next) => {
   const { token } = req.cookies;
 
   if (!token) {
+    
     // Stop execution after sending a response
     return res.status(401).json({
       success: false,
